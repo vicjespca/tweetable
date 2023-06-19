@@ -1,0 +1,9 @@
+.layout-session {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.size-btn {
+  width: 100%;
+}

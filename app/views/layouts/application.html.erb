@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tweetable</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Montserrat:wght@600&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  <br>
+  <div class="container">
+    <header>
+      <div class="menu-logo-layout mb">
+        <div class="logo-size">
+          <%= link_to(image_tag("logo.svg"), root_path) %>
+        </div>
+        <div>
+          <%= image_tag "menu.svg", class: "menu pointer" %>
+        </div>
+      </div>
+      <div class="menu-hidden">
+        <div class="layout-center-text">
+          <% if !current_user %>
+            <p>Login to start the tweeting madness!</p>
+            <button class="layout-button-login"><%= link_to "Login", new_user_session_path%></button>
+          <% end %>
+          <%if current_user %>
+            <% if user_signed_in? %>
+              <p>Thanks for using Tweetable!</p>
+              <p><%= link_to "Profile", user_path(current_user.id) %></p>
+            <% end %>
+            <% if user_signed_in? %>
+              <button class="layout-button"><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %></button>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </header>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </div>
+  <%= yield %>
+  <div class="container layout-center-text">
+    <footer>
+      <p>© <%= Time.now.year %> - Codeable Tweetable</p>
+      <p>Build with ♥ by</p>
+      <p>Victor Espinoza</p>
+    </footer>
+  </div>
+</body>
+</html>
+<script>
+var menuMobile = document.querySelector(".menu")
+var navbarMobile = document.querySelector(".menu-hidden")
+menuMobile.addEventListener("click", function() {
+  navbarMobile.classList.toggle("menu-show")
+});
+</script>
